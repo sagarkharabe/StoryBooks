@@ -2,6 +2,6 @@
 
 A social media platform to read stories created by other users.
 
-##Usage 
+## Usage 
 
 `npm run start`
