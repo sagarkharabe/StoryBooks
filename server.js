@@ -4,13 +4,13 @@ var app = express();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const { mongoURI } = require("./config/keys");
-
+const exphbs = require("express-handlebars");
 const passport = require("passport");
 
 require("./config/passport")(passport);
 
 require("./models/index");
-
+const index = require("./routes/index");
 const auth = require("./routes/auth");
 mongoose.Promise = global.Promise;
 mongoose
@@ -24,9 +24,8 @@ mongoose
     console.log(err);
   });
 
-app.get("/", (req, res) => {
-  res.send("OK");
-});
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 app.use(cookieParser());
 app.use(
@@ -43,6 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/auth", auth);
+app.use("/", index);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
