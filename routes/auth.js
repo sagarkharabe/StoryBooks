@@ -23,15 +23,14 @@ router.get(
 router.route("login").get((req, res) => {
   res.send("Login");
 });
-
-router.get("/add", (req, res) => {
-  const newUser = {
-    googleID: 23452,
-    firstName: "sagar",
-    lastName: "maal",
-    email: "asdfas",
-    image: "sadfa"
-  };
-  new User(newUser).save().then(user => res.json(user));
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.send("logged Out");
 });
+router.get("/verify", (req, res) => {
+  if (req.user) {
+    console.log(req.user);
+  } else console.log("not auth");
+});
+
 module.exports = router;
