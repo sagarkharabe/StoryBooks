@@ -2,13 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 var app = express();
 const { mongoURI } = require("./config/keys");
-const port = process.env.PORT || 5000;
+
 const passport = require("passport");
 
 require("./config/passport")(passport);
 
-const auth = require("./routes/auth");
+require("./models/index");
 
+const auth = require("./routes/auth");
+mongoose.Promise = global.Promise;
 mongoose
   .connect(mongoURI, {
     useNewUrlParser: true
@@ -25,6 +27,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", auth);
+app.use(passport.initialize());
+app.use(passport.session());
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Port opened ${port}`);
 });
