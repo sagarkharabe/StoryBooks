@@ -10,6 +10,6 @@ router.get("/", (req, res) => {
 //   res.
 // })
 router.get("/dashboard", (req, res) => {
-  res.send("dashboard");
+  res.render("index/dashboard");
 });
 module.exports = router;
