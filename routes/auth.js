@@ -23,6 +23,7 @@ router.get(
 router.route("login").get((req, res) => {
   res.send("Login");
 });
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.send("logged Out");
@@ -32,5 +33,4 @@ router.get("/verify", (req, res) => {
     console.log(req.user);
   } else console.log("not auth");
 });
-
 module.exports = router;
