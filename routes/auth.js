@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const passport = require("passport");
-require("../models/index");
+// require("../models/index");
 const User = mongoose.model("Users");
 router
   .route("/google")

@@ -1,3 +1,6 @@
 const userModel = require("./users");
+const storyModel = require("./stories");
 
-module.exports = userModel;
+exports = userModel;
+
+exports = storyModel;

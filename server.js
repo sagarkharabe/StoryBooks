@@ -7,6 +7,7 @@ const { mongoURI } = require("./config/keys");
 const exphbs = require("express-handlebars");
 const passport = require("passport");
 const path = require("path");
+const bodyParser = require("body-parser");
 require("./config/passport")(passport);
 
 require("./models/index");
@@ -37,6 +38,8 @@ app.use(
     saveUninitialized: false
   })
 );
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
