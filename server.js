@@ -22,6 +22,7 @@ mongoose
     console.log("MongoDB connected");
   })
   .catch(err => {
+    console.log("in mongoose connect catch");
     console.log(err);
   });
 
