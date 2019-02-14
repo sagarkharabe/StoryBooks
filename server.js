@@ -10,7 +10,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 require("./config/passport")(passport);
 
-const { truncate, formatDate } = require("./helpers/hbs");
+const { truncate, formatDate, select } = require("./helpers/hbs");
 require("./models/index");
 const index = require("./routes/index");
 const auth = require("./routes/auth");
@@ -33,7 +33,8 @@ app.engine(
   exphbs({
     helpers: {
       truncate: truncate,
-      formatDate: formatDate
+      formatDate: formatDate,
+      select: select
     },
     defaultLayout: "main"
   })

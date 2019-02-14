@@ -44,4 +44,12 @@ router.route("/add").get(ensureAuthenticated, (req, res) => {
   res.render("stories/add");
 });
 
+router.get("/edit/:id", (req, res) => {
+  Story.findById({ _id: req.params.id }).then(story => {
+    res.render("stories/edit", {
+      story: story
+    });
+  });
+});
+
 module.exports = router;
