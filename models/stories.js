@@ -29,13 +29,13 @@ const storySchema = new mongoose.Schema({
       },
       commentUser: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "Users"
       }
     }
   ],
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "Users"
   },
   date: {
     type: Date,

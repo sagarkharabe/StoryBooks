@@ -10,6 +10,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 require("./config/passport")(passport);
 
+const { truncate, formatDate } = require("./helpers/hbs");
 require("./models/index");
 const index = require("./routes/index");
 const auth = require("./routes/auth");
@@ -27,7 +28,16 @@ mongoose
     console.log(err);
   });
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  exphbs({
+    helpers: {
+      truncate: truncate,
+      formatDate: formatDate
+    },
+    defaultLayout: "main"
+  })
+);
 app.set("view engine", "handlebars");
 
 app.use(cookieParser());

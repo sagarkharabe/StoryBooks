@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const { ensureAuthenticated, ensureGuest } = require("../helpers/auth");
-require("../models/index");
+//require("../models/index");
 const Story = mongoose.model("stories");
 router
   .route("/")
@@ -28,15 +28,17 @@ router
       user: req.user.id
     });
     newStory.save().then(story => {
-      res.redirect(`/stories/show/${story.id}`);
+      res.redirect(`/stories/show/${story._id}`);
     });
   });
-router.get("show/:id", (req, res) => {
-  Story.findById(req.params.id).then(story => {
-    res.render("/stories/show", {
-      story: story
+router.get("/show/:id", (req, res) => {
+  Story.findById(req.params.id)
+    .populate("user")
+    .then(story => {
+      res.render("stories/show", {
+        story: story
+      });
     });
-  });
 });
 router.route("/add").get(ensureAuthenticated, (req, res) => {
   res.render("stories/add");
