@@ -1,7 +1,7 @@
 <h1>Welcome {{user.firstName}}</h1>
 <h4>Your Stories</h4>
 {{#if stories}}
-<table class="stripped">
+<table class="striped">
   <thead>
     <tr>
       <th>Title </th>
@@ -24,7 +24,8 @@
         <a class=" btn left-align" href="/stories/edit/{{id}}">
           <i class="fa fa-pencil"></i> Edit
         </a>
-        <form action="/stories" method="POST" id="delete-form">
+        <form action="/stories/{{id}}?_method=DELETE" method="POST" id="delete-form">
+          <input type="hidden" name="_method" value="DELETE">
           <button type='submit' class="btn red">
             <i class="fa fa-remove"></i> Delete</button>
         </form>

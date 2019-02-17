@@ -8,9 +8,13 @@ module.exports = {
       new_str = new_str.length > 0 ? new_str : str.substr(0, len);
       return new_str + "...";
     }
+    return str;
   },
   formatDate: function(date, format) {
     return moment(date).format(format);
+  },
+  stripTags: function(input) {
+    return input.replace(/<(?:.|\n)*?>/gm, "");
   },
   select: function(selected, options) {
     return options

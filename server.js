@@ -8,9 +8,10 @@ const exphbs = require("express-handlebars");
 const passport = require("passport");
 const path = require("path");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 require("./config/passport")(passport);
 
-const { truncate, formatDate, select } = require("./helpers/hbs");
+const { truncate, formatDate, select, stripTags } = require("./helpers/hbs");
 require("./models/index");
 const index = require("./routes/index");
 const auth = require("./routes/auth");
@@ -34,7 +35,8 @@ app.engine(
     helpers: {
       truncate: truncate,
       formatDate: formatDate,
-      select: select
+      select: select,
+      stripTags: stripTags
     },
     defaultLayout: "main"
   })
@@ -57,6 +59,8 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
+
+app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));
 

@@ -15,7 +15,7 @@ footer {
 }
 
 .story-text {
-  height: 100px;
+  height: 140px;
 }
 .dash-status {
   text-transform: capitalize;
@@ -23,4 +23,8 @@ footer {
 
 #delete-form {
   display: inline;
+}
+
+.story-title {
+  height: 50px;
 }

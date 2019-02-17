@@ -51,5 +51,28 @@ router.get("/edit/:id", (req, res) => {
     });
   });
 });
+//edit form process
+router
+  .route("/:id")
+  .put((req, res) => {
+    Story.findById(req.params.id).then(story => {
+      let allowComments;
+      if (req.body.allowComments) allowComments = true;
+      else allowComments = false;
 
+      story.title = req.body.title;
+      story.body = req.body.body;
+      story.status = req.body.status;
+      story.allowComments = allowComments;
+
+      story.save().then(story => {
+        res.redirect("/dashboard");
+      });
+    });
+  })
+  .delete((req, res) => {
+    Story.remove({ _id: req.params.id }).then(() => {
+      res.redirect("/dashboard");
+    });
+  });
 module.exports = router;
