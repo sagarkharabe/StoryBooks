@@ -4,21 +4,28 @@
   <div class="col s12 m4">
     <div class="card">
       <div class="card-image">
-        <a href="/stories/edit/{{id}}" class="btn-floating halfway-fab red">
-          <i class="fa fa-pencil"></i>
-        </a>
+        {{#if user}}
+        {{{editIcon user.id ../user.id id}}}
+        {{/if}}
+        {{#if (statusFunc status)}}
+        <span class=" badge red left">
+          <i class="fa fa-exclamation-circle "></i>
+        </span>
+        {{/if}}
+
       </div>
       <div class="card-content centre-align">
         <h5 class="story-title">{{stripTags (truncate title 20)}}</h5>
         <p class="story-text">{{stripTags (truncate body 150)}}</p>
         <br>
         <div class="chip">
-          <img src="{{user.image}}" alt="Author"> {{user.firstName}} {{user.lastName}}
+          <img src="{{user.image}}" alt="Author">
+          <a href="/stories/user/{{user.id}}">{{user.firstName}} {{user.lastName}}</a>
         </div>
       </div>
       <div class="card-action center-align">
-        <div class="btn grey" href="/stories/show/{{id}}">
-          Read More
+        <div>
+          <a class="btn grey" href="/stories/show/{{id}}"> Read More </a>
         </div>
       </div>
     </div>

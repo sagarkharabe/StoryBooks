@@ -11,7 +11,14 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 require("./config/passport")(passport);
 
-const { truncate, formatDate, select, stripTags } = require("./helpers/hbs");
+const {
+  truncate,
+  formatDate,
+  select,
+  stripTags,
+  editIcon,
+  statusFunc
+} = require("./helpers/hbs");
 require("./models/index");
 const index = require("./routes/index");
 const auth = require("./routes/auth");
@@ -36,7 +43,9 @@ app.engine(
       truncate: truncate,
       formatDate: formatDate,
       select: select,
-      stripTags: stripTags
+      stripTags: stripTags,
+      editIcon: editIcon,
+      statusFunc: statusFunc
     },
     defaultLayout: "main"
   })
